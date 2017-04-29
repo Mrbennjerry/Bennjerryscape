@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="data/libs/netty-3.7.0.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="data/libs/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="data/libs/minifs_v1.jar"/>
+	<classpathentry exported="true" kind="lib" path="data/libs/FileStore.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="data/libs"/>
+	<classpathentry exported="true" kind="lib" path="data/libs/DiscordBot.jar"/>
+	<classpathentry exported="true" kind="lib" path="data/libs/Discord4j-2.8.0-shaded.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

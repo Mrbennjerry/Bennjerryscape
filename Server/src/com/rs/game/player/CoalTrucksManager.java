@@ -1,0 +1,64 @@
+package com.rs.game.player;
+
+import java.io.Serializable;
+
+public class CoalTrucksManager implements Serializable {
+
+	private static final long serialVersionUID = 20296244197867311L;
+
+	private transient Player player;
+
+	private int coal;
+
+	private static final int MAX_COAL = 196;
+	public static final int COAL = 453;
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public void init() {
+		refreshCoalTrucks();
+	}
+
+	public void refreshCoalTrucks() {
+		player.getVarsManager().sendVarOld(74, coal);
+	}
+
+	public void investigate() {
+		//player.getPackets().sendGameMessage("There are currently " + coal + " coal in the truck.");
+	    player.getPackets().sendGameMessage("You investigate that your shit got sent straight to the bank.");
+	}
+
+	public void removeCoal() {
+		if (coal == 0)
+			return;
+		int slots = player.getInventory().getFreeSlots();
+		if (slots == 0) {
+			player.getPackets().sendGameMessage("Not enough space in your inventory.");
+			return;
+		}
+		if (coal < slots)
+			slots = coal;
+		player.getInventory().addItem(COAL, slots);
+		coal -= slots;
+		refreshCoalTrucks();
+		player.getPackets().sendGameMessage("You remove some of the coal from the truck.", true);
+	}
+
+	public void addCoal(int itemId) {
+		//if (coal >= MAX_COAL) {
+		//	player.getPackets().sendGameMessage("The coal truck is full.");
+		//	return;
+		//}
+		int addCoal = player.getInventory().getAmountOf(itemId);
+		//if (coal + addCoal >= MAX_COAL)
+		//	addCoal = MAX_COAL - coal;
+		player.getInventory().deleteItem(itemId, addCoal);
+		//coal += addCoal;
+		//refreshCoalTrucks();
+		player.getBank().addItem(itemId, addCoal, true);
+		player.getPackets().sendGameMessage("You cart the ores off to the bank.", true);
+	}
+
+}
